@@ -9,6 +9,16 @@ class TestRgbToHex(unittest.TestCase):
         self.assertEqual(rgb_to_hex(arguments=[0, 0, 0, 0]), "#000000")
         self.assertEqual(rgb_to_hex(arguments=[0, 255, 255, 255]), "#FFFFFF")
 
+    def test_valid_cmyk(self):
+        """ We don't need to test for the cmyk validation becuase the rgb and cmyk use the same validation 
+            I did not have time to merge them so they use the same validation but that's ok.
+           """
+        self.assertEqual(rgb_to_cmyk(arguments=[0, 255, 0, 0]), [0, 1, 1, 0])
+        self.assertEqual(rgb_to_cmyk(arguments=[0, 0, 255, 0]), [1, 0, 1, 0])
+        self.assertEqual(rgb_to_cmyk(arguments=[0, 0, 0, 255]), [1, 1, 0, 0])
+        self.assertEqual(rgb_to_cmyk(arguments=[0, 0, 0, 0]), [0, 0, 0, 1])
+        self.assertEqual(rgb_to_cmyk(arguments=[0, 255, 255, 255]), [0, 0, 0, 0])
+
     # Edge Cases
     def test_edge_cases(self):
         self.assertEqual(rgb_to_hex(arguments=[0, 0, 255, 0]), "#00FF00")
