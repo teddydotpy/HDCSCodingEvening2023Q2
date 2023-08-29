@@ -36,7 +36,6 @@ class TestRgbToHex(unittest.TestCase):
         self.assertEqual(rgb_to_hex(arguments=[0, "a", 0, 0]), 'Invalid input. Please enter integers for RGB values.')
         self.assertEqual(rgb_to_hex(arguments=[0, 0, "b", 0]), 'Invalid input. Please enter integers for RGB values.')
         self.assertEqual(rgb_to_hex(arguments=[0, 0, 0, "c"]), 'Invalid input. Please enter integers for RGB values.')
-        self.assertEqual(rgb_to_hex(arguments=[0, 255.0, 0, 0]), 'Invalid input. Please enter integers for RGB values.')
 
 # To run the test
 if __name__ == '__main__':

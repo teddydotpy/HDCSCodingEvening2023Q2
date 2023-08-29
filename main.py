@@ -12,8 +12,8 @@ def rgb_to_hex(arguments: list) -> str:
     try:
         red, green, blue = map(int, arguments[1:])
         # This entire small section exists simply to throw an error if the inputs have a float.
-        check_if_floats = lambda x: isinstance(x, float) and exec('raise ValueError()')
-        map(check_if_floats, arguments)
+        check_if_floats = lambda x: not isinstance(x, int) and exec('raise ValueError()')
+        map(check_if_floats, arguments[1:])
 
         # This is just to make sure I am in range
         if all(0 <= x <= 255 for x in [red, green, blue]):
@@ -30,15 +30,15 @@ def rgb_to_cmyk(arguments: list) -> str:
         red, green, blue = map(int, arguments[1:])
         # This entire small section exists simply to throw an error if the inputs have a float.
         check_if_floats = lambda x: isinstance(x, float) and exec('raise ValueError()')
-        map(check_if_floats, arguments)
+        map(check_if_floats, arguments[1:])
 
         # This is just to make sure I am in range
         if all(0 <= x <= 255 for x in [red, green, blue]):
             converted_rgb = [red/255, green/255, blue/255]
             k = 1 - max(converted_rgb)
-            c = (1 - converted_rgb[0] - k) / 1 - k
-            m = (1 - converted_rgb[1] - k) / 1 - k
-            y = (1 - converted_rgb[2] - k) / 1 - k
+            c = 1 - (converted_rgb[0] + k) / 1 - k
+            m = 1 -(converted_rgb[1] + k) / 1 - k
+            y = 1 - (converted_rgb[2] + k) / 1 - k
             cmyk = [c, m, y, k]
             return cmyk
         else:
